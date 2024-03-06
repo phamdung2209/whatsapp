@@ -1,19 +1,32 @@
-import React, { useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { FaCamera } from 'react-icons/fa'
-import { imgPreviewUrl } from '~/lib/utils'
+import { imgPreview } from '~/lib/utils'
 import DropdownMenuImage from './dropdown-menu-image'
+import { Session } from 'next-auth'
 
-const PreviewImage = () => {
+const PreviewImage = (
+    { session }: { session: Session | null },
+    ref: React.RefObject<HTMLInputElement> | any,
+) => {
     const [isHovered, setIsHovered] = useState<boolean>(false)
     const imgRef = useRef<HTMLInputElement>(null)
     const [imgUrl, setImgUrl] = useState<string>('' as string)
 
-    const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    useImperativeHandle(ref, () => ({ imgUrl }))
+
+    useEffect(() => {
+        if (session) {
+            setImgUrl(session?.user?.image ?? '')
+        }
+    }, [session])
+
+    const handleChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         imgUrl && URL.revokeObjectURL(imgUrl)
         if (file) {
-            const blob = imgPreviewUrl(file)
+            // const blob = imgPreviewUrl(file)
+            const blob = await imgPreview(file)
             setImgUrl(blob)
         }
     }
@@ -23,7 +36,7 @@ const PreviewImage = () => {
             <Avatar
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className={`h-48 w-48 cursor-pointer hover:brightness-110 transition duration-150 transform hover:scale-[1.03] filter hover:drop-shadow-lg relative select-none`}
+                className={`h-48 w-48 cursor-pointer hover:brightness-110 transition duration-150 transform hover:scale-[1.03] filter hover:drop-shadow-lg relative select-none flex items-center justify-center`}
             >
                 <div
                     className={`${
@@ -56,4 +69,4 @@ const PreviewImage = () => {
     )
 }
 
-export default PreviewImage
+export default forwardRef(PreviewImage)

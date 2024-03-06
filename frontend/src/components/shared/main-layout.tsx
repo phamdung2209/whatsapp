@@ -12,7 +12,7 @@ async function MainLayout() {
                     width={300}
                     height={300}
                 />
-                <h1 className="text-7xl text-white">Whatsapp</h1>
+                <h1 className="text-7xl text-white hidden xs:block">Whatsapp</h1>
             </div>
         </>
     )

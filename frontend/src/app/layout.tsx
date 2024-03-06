@@ -19,11 +19,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <link rel="icon" href="/images/favicon.png" />
             <body className={inter.className}>
-                <ScrollArea>
-                    {children}
-                    <Toaster richColors />
-                </ScrollArea>
+                <ScrollArea>{children}</ScrollArea>
+                <Toaster richColors />
             </body>
         </html>
     )

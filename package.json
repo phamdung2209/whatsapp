@@ -5,7 +5,7 @@
     "main": "backend/dist/server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon --exec ts-node backend/server.ts",
+        "start": "nodemon --exec ts-node backend/server.ts --ignore frontend/",
         "dev": "cd frontend && npm run dev",
         "build": "npm install && tsc"
     },

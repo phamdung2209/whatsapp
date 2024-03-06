@@ -1,0 +1,84 @@
+// search-bar
+.search-bar {
+    input {
+        &:focus-within {
+            &::placeholder {
+                transition: all 0.1s ease-in-out;
+                color: transparent;
+            }
+
+            &~div .arrow-left {
+                display: block;
+                animation: spin 0.2s linear;
+            }
+
+            &~div .search-btn {
+                display: none;
+            }
+        }
+    }
+
+    .close-btn {
+        visibility: hidden;
+        transition: visibility 0.2s ease-in-out, transform 0.2s ease-in-out, opacity 0.2s linear;
+        animation: opacity 0.2s linear;
+    }
+
+    input:not(:placeholder-shown)~.close-btn {
+        visibility: visible;
+        animation: spin 0.2s linear;
+    }
+
+    input:not(:placeholder-shown)~div {
+        .arrow-left {
+            display: block;
+            animation: opacity 0.2s linear;
+        }
+
+        .search-btn {
+            display: none;
+        }
+    }
+}
+
+// chat-side-bar
+.chat-side-bar {
+    footer {
+        .close-btn {
+            visibility: hidden;
+            transition: visibility 0.2s ease-in-out, transform 0.2s ease-in-out, opacity 0.2s linear;
+            animation: opacity 0.2s linear;
+        }
+
+        &:hover {
+            .close-btn {
+                visibility: visible;
+                animation: spin 0.2s linear;
+            }
+        }
+    }
+}
+
+
+// keyframes
+@keyframes spin {
+    0% {
+        opacity: 0;
+        transform: rotate(-90deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

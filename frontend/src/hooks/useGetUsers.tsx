@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { toast } from 'sonner'
 import { IUserDocument } from '~/types'
 import request from '~/ultils/httpRequest.config'
 
@@ -18,7 +18,16 @@ const useGetUsers = () => {
             console.log('users: ', users)
         } catch (error: any) {
             console.log('Error in fetchUsers', error.message)
-            toast.error(error.message)
+            toast.error(error.message, {
+                description: 'Error fetching users',
+                duration: 5000,
+                position: 'top-right',
+                icon: '😭',
+                action: {
+                    label: 'Close',
+                    onClick: () => console.log('closed'),
+                },
+            })
         } finally {
             setLoading(false)
         }

@@ -17,8 +17,17 @@ const config = {
                 '2xl': '1400px',
             },
         },
+        screens: {
+            xs: '448px',
+            sm: '576px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px',
+            '2xl': '1400px',
+        },
         extend: {
             colors: {
+                tea: '#008069',
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',
@@ -72,6 +81,7 @@ const config = {
                     'outgoing-background': '#005c4b',
                     'bubble-meta': 'hsla(0,0%,100%,0.6)',
                     'icon-ack': '#53bdeb',
+                    sigMain: '#121212',
                 },
             },
             borderRadius: {
@@ -92,6 +102,13 @@ const config = {
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
+            },
+            backgroundColor: {
+                mainColor: '#222e35',
+                bgChat: '#F0F2F5',
+            },
+            borderColor: {
+                mainColor: '#e5e7e8',
             },
         },
     },

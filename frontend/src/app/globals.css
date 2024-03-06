@@ -74,3 +74,18 @@
         @apply bg-background text-foreground;
     }
 }
+
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-thumb,
+html[dir] .light ::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--black-rgb), 0.2);
+}
+
+::-webkit-scrollbar-track,
+html[dir] .light ::-webkit-scrollbar-track {
+    background: rgba(var(--white-rgb), 0.1);
+}

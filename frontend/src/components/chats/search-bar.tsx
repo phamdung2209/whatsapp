@@ -16,13 +16,13 @@ const SearchBar = () => {
     }
 
     return (
-        <div className="h-12 flex items-center justify-between px-4 py-1.5 border-b border-mainColor gap-3 search-bar transition-all duration-200 ease-in-out">
+        <div className="h-14 flex items-center justify-between px-4 py-1.5 border-b border-mainColor gap-3 search-bar transition-all duration-200 ease-in-out">
             <form
                 onSubmit={handleSearch}
                 className="flex items-center justify-around gap-3 text-[#54656f] text-sm bg-bgChat w-full h-full rounded-md px-2"
             >
                 <input
-                    className="w-full bg-transparent border-none outline-none caret-[#ff3b5c] order-2 ms-2"
+                    className="w-full bg-transparent border-none outline-none caret-[#ff3b5c] order-2 ms-2 placeholder:text-colors-secondary"
                     placeholder="Search or start a new chat"
                     spellCheck="false"
                     autoCorrect="off"
@@ -53,7 +53,7 @@ const SearchBar = () => {
                 </div>
             </form>
 
-            <Filter className="cursor-pointer" />
+            <Filter className="cursor-pointer text-colors-secondary" />
         </div>
     )
 }

@@ -62,6 +62,7 @@ const config = {
                     foreground: 'hsl(var(--card-foreground))',
                 },
                 colors: {
+                    primary: '#41525d',
                     secondary: '#8696a0',
                     'teal-light': '#7ae3c3',
                     'photopicker-overlay-background': 'rgba(30,42,49,0.8)',
@@ -83,6 +84,9 @@ const config = {
                     'icon-ack': '#53bdeb',
                     sigMain: '#121212',
                 },
+            },
+            backgroundImage: {
+                'bg-chat': 'url(/images/chat-bg.png)',
             },
             borderRadius: {
                 lg: 'var(--radius)',

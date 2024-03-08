@@ -54,19 +54,19 @@ const CreateUser = ({ session }: { session: Session | null }) => {
 
                 <div
                     className="flex items-center gap-5 w-full"
-                    // onClick={(e) => {
-                    //     e.preventDefault()
-                    //     toast.success('Welcome to Whatsapp', {
-                    //         description: 'Let chat with friends and family',
-                    //         duration: 5000,
-                    //         position: 'top-right',
-                    //         icon: '👋',
-                    //         action: {
-                    //             label: 'Close',
-                    //             onClick: () => console.log('closed'),
-                    //         },
-                    //     })
-                    // }}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        toast.success('Welcome to Whatsapp', {
+                            description: 'Let chat with friends and family',
+                            duration: 5000,
+                            position: 'top-right',
+                            icon: '👋',
+                            action: {
+                                label: 'Close',
+                                onClick: () => console.log('closed'),
+                            },
+                        })
+                    }}
                 >
                     <LoginUpdate />
 

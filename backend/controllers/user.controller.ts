@@ -53,3 +53,17 @@ export const updateUser = async (req: Request, res: Response) => {
         res.json({ error: error.message })
     }
 }
+
+export const getContacts = async (req: Request, res: Response) => {
+    try {
+        const { authId } = req.params
+
+        const users: IUserDocument[] = await User.find({ _id: { $ne: authId } })
+        if (!users) return res.json({ error: 'Users not found' })
+
+        res.json(users)
+    } catch (error: any) {
+        console.log('Error in getContacts controller: (user.controller.ts) ', error.message)
+        res.json({ error: error.message })
+    }
+}

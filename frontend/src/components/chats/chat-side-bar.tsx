@@ -15,7 +15,7 @@ const ChatSidebar = async () => {
     const { image } = session?.user ?? { image: '' }
 
     return (
-        <aside className="chat-side-bar flex min-w-80 md:flex-[1.3_1.3_0] flex-[2_2_0] bg-white flex-col w-full border-r border-mainColor overflow-y-auto relative">
+        <aside className="chat-side-bar hidden md:flex min-w-80 md:flex-[1.3_1.3_0] flex-[2_2_0] bg-white flex-col w-full border-r border-mainColor overflow-y-auto relative max-h-[calc(100dvh)]">
             <header className="flex justify-between items-center bg-bgChat p-3 sticky">
                 <Avatar className="cursor-pointer">
                     <AvatarImage src={image ?? ''} alt="" />
@@ -28,7 +28,7 @@ const ChatSidebar = async () => {
 
             <SearchBar />
 
-            <ListChats />
+            <ListChats session={session} />
 
             <footer className="absolute bottom-0 right-0 left-0 flex items-center justify-between p-3 py-4 border-t border-mainColor cursor-pointer transition-all duration-200 ease-in-out">
                 <div className="flex items-center gap-3 w-full">

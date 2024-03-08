@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import './globals.css'
-import { ScrollArea } from '~/components/ui/scroll-area'
 import { Toaster } from '~/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,7 +20,7 @@ export default function RootLayout({
         <html lang="en">
             <link rel="icon" href="/images/favicon.png" />
             <body className={inter.className}>
-                <ScrollArea>{children}</ScrollArea>
+                {children}
                 <Toaster richColors />
             </body>
         </html>

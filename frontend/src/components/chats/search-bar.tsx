@@ -29,7 +29,11 @@ const SearchBar = () => {
                     autoComplete="off"
                     value={value}
                     ref={searchRef}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        if (!e.target.value.startsWith(' ')) {
+                            setValue(e.target.value)
+                        }
+                    }}
                 />
 
                 <div>

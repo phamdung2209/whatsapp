@@ -82,3 +82,26 @@
         opacity: 0;
     }
 }
+
+// SendMessages
+.send-messages {
+    label {
+
+        input:not(:placeholder-shown) {}
+
+        input {
+            &:focus-within {
+                &::placeholder {
+                    transition: all 0.1s ease-in-out;
+                    color: transparent;
+                }
+            }
+        }
+
+    }
+
+    .btn-micro {}
+
+    .btn-send {}
+
+}

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+
 import { Lock } from '~/assets/icons'
 import Messages from '~/components/chats/messages'
 import { Button } from '~/components/ui/button'

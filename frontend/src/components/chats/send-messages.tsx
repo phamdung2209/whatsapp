@@ -3,13 +3,24 @@ import Tippy from '@tippyjs/react'
 
 import { Emotion, Micro, Send } from '~/assets/icons'
 import { FaCirclePlus } from 'react-icons/fa6'
+import { IUserDocument } from '~/types'
+import { useFormState } from 'react-dom'
+import { sendMessagesAction } from '~/lib/actions'
 
-const SendMessages = () => {
+const SendMessages = ({ selectedConversation }: { selectedConversation: IUserDocument }) => {
     const [message, setMessage] = useState<string>('')
+
+    const [messageError, dispatch] = useFormState(() => {
+        if (message) {
+            sendMessagesAction(selectedConversation._id, message)
+        }
+    }, '' || undefined)
+
+    console.log('messageError', messageError)
 
     return (
         <form
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}
+            onSubmit={dispatch}
             className="send-messages text-colors-primary md:gap-6 gap-2 flex justify-between items-center bg-bgChat py-1 sm:px-4 px-1 h-16 xs:w-full max-h-36 sticky bottom-0"
         >
             <Tippy content="Attach">

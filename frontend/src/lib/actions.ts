@@ -3,10 +3,9 @@
 import { revalidatePath } from 'next/cache'
 import { v2 as cloudinary } from 'cloudinary'
 
-import { signIn, signOut } from '~/auth'
+import { auth, signIn, signOut } from '~/auth'
 import * as request from '~/ultils/httpRequest.config'
 import { revalidateImage } from './utils'
-import { toast } from 'sonner'
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -67,5 +66,28 @@ export const updateUserAction = async (
         return data
     } catch (error: any) {
         return error.message
+    }
+}
+
+export const sendMessagesAction = async (receiverId: string, message: string) => {
+    try {
+        const session = await auth()
+        const newMessage = await request.post(`/api/messages/send/${receiverId}`, {
+            message,
+            senderId: session?.user?._id,
+        })
+
+        if (newMessage.error) {
+            throw newMessage.error
+        }
+
+        // SOCKET.IO HERE
+
+        revalidatePath('/(home)', 'page')
+
+        return newMessage
+    } catch (error: any) {
+        console.log('Error in sendMessagesAction: (actions.ts)', error.message)
+        throw error.message
     }
 }

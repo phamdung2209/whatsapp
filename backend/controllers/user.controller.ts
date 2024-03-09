@@ -58,10 +58,21 @@ export const getContacts = async (req: Request, res: Response) => {
     try {
         const { authId } = req.params
 
-        const users: IUserDocument[] = await User.find({ _id: { $ne: authId } })
+        const users: IUserDocument[] = await User.find({ _id: { $ne: authId } }).sort({
+            fullname: 'desc',
+        })
         if (!users) return res.json({ error: 'Users not found' })
 
-        res.json(users)
+        const usersGroupByAlphabet: { [key: string]: IUserDocument[] } = {}
+        users.forEach((user) => {
+            const firstLetter = (user?.fullname?.charAt(0) ?? '').toUpperCase()
+            if (!usersGroupByAlphabet[firstLetter]) {
+                usersGroupByAlphabet[firstLetter] = []
+            }
+            usersGroupByAlphabet[firstLetter].push(user)
+        })
+
+        res.json(usersGroupByAlphabet)
     } catch (error: any) {
         console.log('Error in getContacts controller: (user.controller.ts) ', error.message)
         res.json({ error: error.message })

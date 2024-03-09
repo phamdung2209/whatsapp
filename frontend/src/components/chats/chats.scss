@@ -59,6 +59,56 @@
     }
 }
 
+// SendMessages
+.send-messages {
+    label {
+
+        input {
+            &:focus-within {
+                &::placeholder {
+                    transition: all 0.1s ease-in-out;
+                    color: transparent;
+                }
+            }
+        }
+
+    }
+}
+
+// chats messages
+.chats-messages {
+    .messages-info {
+        .messages-status {
+            .status {
+                transform: translateY(100%)
+            }
+        }
+
+        &:hover {
+            .messages-status {
+                .status {
+                    animation: fade_up 0.2s linear forwards;
+                }
+
+                .messages-username {
+                    animation: fade_down 0.2s linear forwards;
+                }
+            }
+        }
+
+        &:not(:hover) {
+            .messages-status {
+                .status {
+                    animation: fade_down 0.2s linear forwards;
+                }
+
+                .messages-username {
+                    animation: fade_up 0.2s linear forwards;
+                }
+            }
+        }
+    }
+}
 
 // keyframes
 @keyframes spin {
@@ -83,25 +133,26 @@
     }
 }
 
-// SendMessages
-.send-messages {
-    label {
-
-        input:not(:placeholder-shown) {}
-
-        input {
-            &:focus-within {
-                &::placeholder {
-                    transition: all 0.1s ease-in-out;
-                    color: transparent;
-                }
-            }
-        }
-
+@keyframes fade_up {
+    0% {
+        opacity: 0;
+        transform: translateY(100%)
     }
 
-    .btn-micro {}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-    .btn-send {}
+@keyframes fade_down {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 }

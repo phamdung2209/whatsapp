@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { IUserDocument } from '~/types'
 
 type TMessage = {
     id: string
@@ -9,10 +10,16 @@ type TMessage = {
 
 const useConversation = create<{
     messages: TMessage[]
-    addMessage: (messages: TMessage[]) => void
+    setMessage: (messages: TMessage[]) => void
+
+    selectedConversation: IUserDocument | null
+    setSelectedConversation: (selectedConversation: IUserDocument | null) => void | null
 }>((set) => ({
     messages: [],
-    addMessage: (messages) => set({ messages }),
+    setMessage: (messages) => set({ messages }),
+
+    selectedConversation: null,
+    setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
 }))
 
 export default useConversation

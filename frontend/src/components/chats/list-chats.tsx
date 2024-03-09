@@ -7,7 +7,6 @@ import useGetContacts from '~/hooks/useGetContacts'
 const ListChats = ({ session }: { session: Session | null }) => {
     const data: boolean = false
     const contacts = useGetContacts({ authId: session?.user?._id ?? '' })
-    console.log('contacts', contacts)
 
     if (!data) {
         return (

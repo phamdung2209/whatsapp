@@ -70,7 +70,7 @@ const CreateUser = ({ session }: { session: Session | null }) => {
                 >
                     <LoginUpdate />
 
-                    <Link href="/chats" className="text-white w-1/2 h-10 rounded-lg mt-6">
+                    <Link href="/" className="text-white w-1/2 h-10 rounded-lg mt-6">
                         <Button className="w-full">Next</Button>
                     </Link>
                 </div>

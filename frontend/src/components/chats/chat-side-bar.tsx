@@ -1,5 +1,6 @@
+'use client'
+
 import React from 'react'
-import { auth } from '~/auth'
 import { IoClose } from 'react-icons/io5'
 import { FaAngleRight } from 'react-icons/fa6'
 
@@ -9,20 +10,26 @@ import SearchBar from './search-bar'
 import ListChats from './list-chats'
 import { Whatsapp } from '~/assets/icons'
 import './chats.scss'
+import { Session } from 'next-auth'
+import useConversation from '~/zustand/useConversation'
 
-const ChatSidebar = async () => {
-    const session = await auth()
+const ChatSidebar = ({ session }: { session: Session | null }) => {
     const { image } = session?.user ?? { image: '' }
+    const { selectedConversation } = useConversation()
 
     return (
-        <aside className="chat-side-bar hidden md:flex min-w-80 md:flex-[1.3_1.3_0] flex-[2_2_0] bg-white flex-col w-full border-r border-mainColor overflow-y-auto relative max-h-[calc(100dvh)]">
+        <aside
+            className={`chat-side-bar  ${
+                !selectedConversation ? 'flex' : 'hidden'
+            } md:flex min-w-80 md:flex-[1.3_1.3_0] bg-white flex-col w-full border-r border-mainColor relative max-h-[calc(100dvh)]`}
+        >
             <header className="flex justify-between items-center bg-bgChat p-3 sticky">
                 <Avatar className="cursor-pointer">
                     <AvatarImage src={image ?? ''} alt="" />
                 </Avatar>
 
                 <div className="flex items-center gap-5 text-xl text-[#54656f]">
-                    <HeaderActions />
+                    <HeaderActions session={session} />
                 </div>
             </header>
 

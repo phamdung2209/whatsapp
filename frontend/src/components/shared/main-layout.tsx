@@ -8,7 +8,7 @@ async function MainLayout() {
                     priority
                     unoptimized
                     src="/images/whatsapp.gif"
-                    alt="Whatsapp Logo"
+                    alt="Whatsapp"
                     width={300}
                     height={300}
                 />

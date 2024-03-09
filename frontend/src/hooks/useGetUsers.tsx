@@ -15,7 +15,6 @@ const useGetUsers = () => {
             const users: any = await request.get('/api/users')
             if (users.error) throw new Error(users.error)
             setUsers(users)
-            console.log('users: ', users)
         } catch (error: any) {
             console.log('Error in fetchUsers', error.message)
             toast.error(error.message, {

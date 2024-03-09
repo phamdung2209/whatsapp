@@ -16,7 +16,7 @@ const SearchBar = () => {
     }
 
     return (
-        <div className="h-14 flex items-center justify-between px-4 py-1.5 border-b border-mainColor gap-3 search-bar transition-all duration-200 ease-in-out">
+        <div className="h-14 flex items-center justify-between px-4 py-2 border-b border-mainColor gap-3 search-bar transition-all duration-200 ease-in-out">
             <form
                 onSubmit={handleSearch}
                 className="flex items-center justify-around gap-3 text-[#54656f] text-sm bg-bgChat w-full h-full rounded-md px-2"

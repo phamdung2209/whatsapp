@@ -13,13 +13,14 @@ export default NextAuth({
 
             const isAuthPage = request.nextUrl.pathname.startsWith('/login')
             const isOnboardingPage = request.nextUrl.pathname.startsWith('/onboarding')
+            const isHomePage = request.nextUrl.pathname.startsWith('/')
 
-            if (!user && isOnboardingPage) {
+            if (!user && (isOnboardingPage || isHomePage)) {
                 return false
             }
 
             if (user && isAuthPage) {
-                return Response.redirect(new URL('/onboarding', request.nextUrl))
+                return Response.redirect(new URL('/', request.nextUrl))
             }
 
             return true

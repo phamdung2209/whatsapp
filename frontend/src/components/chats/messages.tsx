@@ -12,28 +12,44 @@ import Message from './message'
 import SendMessages from './send-messages'
 import { ScrollArea } from '../ui/scroll-area'
 import { ArrowLeft } from 'lucide-react'
+import { IUserDocument } from '~/types'
 
-const Messages = () => {
+const Messages = ({
+    selectedConversation,
+    setSelectedConversation,
+}: {
+    selectedConversation: IUserDocument
+    setSelectedConversation: (selectedConversation: IUserDocument | null) => void | null
+}) => {
+    const isOnline = true
     return (
-        <div className="w-screen xs:w-full max-h-[calc(100dvh)] overflow-hidden flex flex-col justify-between">
+        <div className="chats-messages w-screen xs:w-full flex flex-col justify-between max-[310px]:overflow-auto">
             <header className="sticky top-0 flex justify-between items-center bg-bgChat p-2 w-full gap-0 xs:gap-4">
-                <div className="flex items-center gap-2 md:gap-4">
-                    <ArrowLeft className="block md:hidden cursor-pointer w-5" />
+                <div className="flex items-center gap-2 md:gap-4 cursor-pointer messages-info">
+                    <ArrowLeft
+                        className="block md:hidden cursor-pointer w-5"
+                        onClick={() => setSelectedConversation(null)}
+                    />
 
                     <Avatar className="sm:h-12 sm:w-12">
                         <AvatarImage
                             className="object-cover"
-                            src="https://res.cloudinary.com/den0awox0/image/upload/v1709350109/qkaxk6xcztpxp8q95qt2.png"
+                            src={selectedConversation?.avatar ?? '/images/avatar.png'}
                             alt=""
                         />
                     </Avatar>
 
                     <div className="flex flex-col justify-start text-nowrap w-auto">
-                        <div className="text-colors-primary text-base truncate w-[70%] xs:w-fit">
-                            Pham Van Dung
+                        <div className="text-colors-primary text-base truncate w-[119px] xs:w-fit">
+                            {selectedConversation?.fullname ?? selectedConversation?.username}
                         </div>
-                        <div className="text-colors-secondary text-xs font-medium truncate w-[70%] xs:w-fit">
-                            Announcements
+                        <div className="messages-status relative flex items-center text-colors-secondary text-xs font-medium truncate w-[119px] xs:w-fit">
+                            <div className="messages-username h-fit">
+                                {selectedConversation?.username}
+                            </div>
+                            <div className="status h-fit absolute">
+                                {isOnline ? 'Online' : 'Offline'}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +85,7 @@ const Messages = () => {
                 </div>
             </ScrollArea>
 
-            <SendMessages />
+            <SendMessages selectedConversation={selectedConversation} />
         </div>
     )
 }

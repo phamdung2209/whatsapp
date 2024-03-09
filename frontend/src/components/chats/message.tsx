@@ -29,32 +29,6 @@ const Message = () => {
                         Manage community
                     </Button>
                 </div>
-
-                {Array.from({ length: 15 }).map((_, i) => (
-                    <div key={i}>
-                        <div className="uppercase text-colors-secondary text-xs p-2 bg-white w-fit shadow-sm rounded-md">
-                            yesterday
-                        </div>
-
-                        <div className="p-2 px-4 bg-white flex items-center flex-col justify-center gap-5 w-fit shadow-sm rounded-md">
-                            <div className="flex items-center justify-center flex-col gap-2 text-center">
-                                <Avatar>
-                                    <AvatarImage src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                </Avatar>
-                                <h3 className="text-colors-primary font-medium">
-                                    Welcome to your community!
-                                </h3>
-                                <p className="text-colors-secondary text-sm">
-                                    Send important admin updates to all your members at once.
-                                </p>
-                            </div>
-
-                            <Button className="bg-transparent w-full text-tea hover:bg-transparent">
-                                Manage community
-                            </Button>
-                        </div>
-                    </div>
-                ))}
             </div>
         )
     }

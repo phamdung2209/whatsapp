@@ -6,6 +6,7 @@ import { v2 as cloudinary } from 'cloudinary'
 import { auth, signIn, signOut } from '~/auth'
 import * as request from '~/ultils/httpRequest.config'
 import { revalidateImage } from './utils'
+import { IMessageType } from '~/types'
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -69,12 +70,32 @@ export const updateUserAction = async (
     }
 }
 
-export const sendMessagesAction = async (receiverId: string, message: string) => {
+export const sendMessagesAction = async (
+    receiverId: string,
+    message: string,
+    messageType: IMessageType['text' | 'image' | 'video' | 'audio' | 'file'],
+) => {
     try {
         const session = await auth()
+        const senderId = session?.user?._id
+        if (!session) throw new Error('Unauthorized user')
+
+        if (
+            messageType === 'image' ||
+            messageType === 'video' ||
+            messageType === 'audio' ||
+            messageType === 'file'
+        ) {
+            const { secure_url } = await cloudinary.uploader.upload(message, {
+                folder: `whatsapp/messages/images/${senderId}/${receiverId}`,
+            })
+            message = secure_url
+        }
+
         const newMessage = await request.post(`/api/messages/send/${receiverId}`, {
             message,
-            senderId: session?.user?._id,
+            senderId,
+            messageType,
         })
 
         if (newMessage.error) {

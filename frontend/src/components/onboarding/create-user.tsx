@@ -14,12 +14,13 @@ import { Loader2 } from 'lucide-react'
 
 const CreateUser = ({ session }: { session: Session | null }) => {
     const [name, setName] = useState<string>('')
+    const imageRef = useRef<HTMLImageElement | any>(null)
+
     useEffect(() => {
         if (session) {
             setName(session?.user?.name ?? '')
         }
     }, [session])
-    const imageRef = useRef<HTMLImageElement | any>(null)
 
     const [err, dispatch] = useFormState(() => {
         updateUserAction(
@@ -52,25 +53,25 @@ const CreateUser = ({ session }: { session: Session | null }) => {
                     className="bg-colors-input-background text-start border-none outline-none focus:outline-none text-white h-10 rounded-lg px-5 py-4 w-full"
                 />
 
-                <div
-                    className="flex items-center gap-5 w-full"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        toast.success('Welcome to Whatsapp', {
-                            description: 'Let chat with friends and family',
-                            duration: 5000,
-                            position: 'top-right',
-                            icon: '👋',
-                            action: {
-                                label: 'Close',
-                                onClick: () => console.log('closed'),
-                            },
-                        })
-                    }}
-                >
+                <div className="flex items-center gap-5 w-full">
                     <LoginUpdate />
 
-                    <Link href="/" className="text-white w-1/2 h-10 rounded-lg mt-6">
+                    <Link
+                        href="/"
+                        className="text-white w-1/2 h-10 rounded-lg mt-6"
+                        onClick={() => {
+                            toast.success('Welcome to Whatsapp', {
+                                description: 'Let chat with friends and family',
+                                duration: 5000,
+                                position: 'top-right',
+                                icon: '👋',
+                                action: {
+                                    label: 'Close',
+                                    onClick: () => console.log('closed'),
+                                },
+                            })
+                        }}
+                    >
                         <Button className="w-full">Next</Button>
                     </Link>
                 </div>

@@ -1,11 +1,14 @@
 import React from 'react'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
+import useGetmessages from '~/hooks/useGetmessages'
+import { Session } from 'next-auth'
 
-const Message = () => {
-    const messages = false
+const Message = ({ session }: { session: Session | null }) => {
+    const { loading, messages } = useGetmessages({ authId: session?.user?._id ?? '' })
+    console.log('messages: ', messages)
 
-    if (!messages) {
+    if (messages.length === 0) {
         return (
             <div className="flex flex-col items-center h-full justify-center gap-6">
                 <div className="uppercase text-colors-secondary text-xs p-2 bg-white w-fit shadow-sm rounded-md">

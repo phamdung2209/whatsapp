@@ -4,6 +4,10 @@ export interface IMessageDocument extends mongoose.Document {
     senderId: mongoose.Schema.Types.ObjectId
     receiverId: mongoose.Schema.Types.ObjectId
     message: string
+    messageType: 'text' | 'image' | 'video' | 'audio' | 'file'
+    read: boolean
+    delivered: boolean
+    deleted: boolean
     createdAt: Date
     updatedAt: Date
 }
@@ -23,6 +27,23 @@ const messageSchema: mongoose.Schema = new mongoose.Schema<IMessageDocument>(
         message: {
             type: String,
             required: true,
+        },
+        messageType: {
+            type: String,
+            enum: ['text', 'image', 'video', 'audio', 'file'],
+            default: 'text',
+        },
+        read: {
+            type: Boolean,
+            default: false,
+        },
+        delivered: {
+            type: Boolean,
+            default: false,
+        },
+        deleted: {
+            type: Boolean,
+            default: false,
         },
     },
     { timestamps: true },

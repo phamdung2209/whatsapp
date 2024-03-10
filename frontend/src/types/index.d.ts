@@ -8,3 +8,11 @@ export interface IUserDocument {
     createdAt: Date
     updatedAt: Date
 }
+
+export interface IMessageType {
+    text: 'text'
+    image: 'image'
+    video: 'video'
+    audio: 'audio'
+    file: 'file'
+}

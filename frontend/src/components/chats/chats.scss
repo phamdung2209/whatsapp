@@ -110,7 +110,54 @@
     }
 }
 
+// message
+.message {
+    .expand {
+        background: radial-gradient(at top right, #d9fdd3 60%, #d9fdd300 80%);
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    .message-chat {
+        &:hover {
+            .expand {
+                animation: fade_in 0.05s linear forwards;
+            }
+        }
+
+        &:not(:hover) {
+            .expand {
+                animation: fade_out 0.05s linear forwards;
+            }
+        }
+    }
+}
+
 // keyframes
+@keyframes fade_out {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fade_in {
+    0% {
+        opacity: 0;
+        transform: translateX(100%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 @keyframes spin {
     0% {
         opacity: 0;

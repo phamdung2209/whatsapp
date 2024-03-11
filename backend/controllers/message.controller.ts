@@ -88,12 +88,12 @@ export const getMessages = async (req: Request, res: Response) => {
                 {
                     path: 'senderId',
                     model: 'User',
-                    select: '_id fullname avatar',
+                    select: '_id fullname avatar username',
                 },
                 {
                     path: 'receiverId',
                     model: 'User',
-                    select: '_id fullname avatar',
+                    select: '_id fullname avatar username',
                 },
             ],
         })

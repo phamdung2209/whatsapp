@@ -7,6 +7,7 @@ import { Emotion, Micro, Send } from '~/assets/icons'
 import { IUserDocument } from '~/types'
 import { sendMessagesAction } from '~/lib/actions'
 import { Loader2 } from 'lucide-react'
+import { revalidatePath } from 'next/cache'
 
 const SendMessages = ({ selectedConversation }: { selectedConversation: IUserDocument }) => {
     const [message, setMessage] = useState<string>('')

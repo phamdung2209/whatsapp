@@ -104,7 +104,7 @@ export const sendMessagesAction = async (
 
         // SOCKET.IO HERE
 
-        revalidatePath('/(home)', 'page')
+        revalidatePath('/')
 
         return newMessage
     } catch (error: any) {

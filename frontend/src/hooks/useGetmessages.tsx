@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import { auth } from '~/auth'
+
 import * as request from '~/ultils/httpRequest.config'
 import useConversation from '~/zustand/useConversation'
 

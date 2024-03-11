@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import useGetmessages from '~/hooks/useGetmessages'
 import { Session } from 'next-auth'
+import { isLinkUrl } from '~/lib/utils'
 
 const Message = ({ session }: { session: Session | null }) => {
     const { loading, messages } = useGetmessages({ authId: session?.user?._id ?? '' })
-    console.log('messages: ', messages)
+    console.log('messages: ======', messages)
+
+    const lastMsgRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const idTimer = setTimeout(() => {
+            lastMsgRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }, 400)
+
+        return () => clearTimeout(idTimer)
+    }, [messages])
 
     if (messages.length === 0) {
         return (
@@ -38,21 +49,68 @@ const Message = ({ session }: { session: Session | null }) => {
 
     return (
         <>
-            <div className="chat chat-start">
-                <div className="chat-image avatar">
-                    <div className="w-10 rounded-full">
-                        <img
-                            alt="Tailwind CSS chat bubble component"
-                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                        />
+            <div className="select-text">
+                <div className="flex gap-2 items-end">
+                    <Avatar>
+                        <AvatarImage src={messages[0].receiverId.avatar} alt="" />
+                    </Avatar>
+                    <div className="flex flex-col items-start justify-center gap-1 rounded-3xl overflow-hidden text-sm text-colors-primary">
+                        <div className="px-4 py-2 text-start bg-[#D9FDD3] rounded-e-3xl max-w-[70%] break-words">
+                            https://vcdn-sohoa.vnecdn.net/2020/05/01/Mark-Zuckerberg-Vnexpress-3987-1588325634.jpg
+                        </div>
+                        <div className="px-4 py-2 text-start bg-[#D9FDD3] rounded-e-3xl max-w-[70%] break-words">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni tempore
+                            eaque facilis nobis ipsam harum voluptatibus! Exercitationem, obcaecati
+                            perspiciatis dolor illo deserunt adipisci, eius suscipit, voluptates
+                            fuga autem cupiditate minus!
+                        </div>
+                        <div className="px-4 py-2 text-start bg-[#D9FDD3] rounded-e-3xl max-w-[70%] break-words">
+                            ok
+                        </div>
                     </div>
                 </div>
-                <div className="chat-header">
-                    Obi-Wan Kenobi
-                    <time className="text-xs opacity-50">12:45</time>
+
+                <div className="flex flex-col items-end justify-center gap-1 rounded-3xl overflow-hidden text-sm text-colors-primary">
+                    <div className="px-4 py-2 text-start bg-[#D9FDD3] rounded-s-3xl max-w-[70%] break-words">
+                        hehehe
+                    </div>
+                    <div className="px-4 py-2 text-start bg-[#D9FDD3] rounded-s-3xl max-w-[70%] break-words">
+                        ok
+                    </div>
+
+                    <div className="px-4 py-2 text-start bg-[#D9FDD3] rounded-s-3xl max-w-[70%] break-words">
+                        ok
+                    </div>
                 </div>
-                <div className="chat-bubble">You were the Chosen One!</div>
-                <div className="chat-footer opacity-50">Delivered</div>
+
+                {/* {messages.map((message) => (
+                    <div
+                        ref={lastMsgRef}
+                        key={message._id}
+                        className={`flex mt-1 flex-col items-${
+                            session?.user._id === message.senderId._id ? 'end' : 'start'
+                        } justify-center overflow-hidden text-sm text-colors-primary`}
+                    >
+                        <div
+                            className={`px-4 py-2 text-start bg-[#D9FDD3] rounded-${
+                                session?.user._id === message.senderId._id ? 's' : 'e'
+                            }-3xl max-w-[70%] break-words`}
+                        >
+                            {message.message}
+                        </div>
+                    </div>
+                ))} */}
+
+                <div className="w-full flex justify-end  mt-1 mb-2">
+                    <Avatar className="h-[14px] w-[14px]">
+                        <AvatarImage
+                            src={messages[0].receiverId.avatar}
+                            alt=""
+                            className="w-full h-full object-cover"
+                        ></AvatarImage>
+                    </Avatar>
+                </div>
+                <div className="text-end text-colors-secondary text-xs my-1">Sent 6m ago</div>
             </div>
         </>
     )

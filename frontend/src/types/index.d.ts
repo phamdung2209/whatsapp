@@ -16,3 +16,13 @@ export interface IMessageType {
     audio: 'audio'
     file: 'file'
 }
+
+export interface IMessageDocument {
+    _id: string
+    sender: IUserDocument
+    receiver: IUserDocument
+    message: string
+    messageType: IMessageType['text' | 'image' | 'video' | 'audio' | 'file']
+    createdAt: Date
+    updatedAt: Date
+}

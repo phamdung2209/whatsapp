@@ -71,9 +71,6 @@ export const getMessages = async (req: Request, res: Response) => {
         const otherUser: IUserDocument | null = await User.findById(receiverId)
         const authUser: IUserDocument | null = await User.findById(senderId)
 
-        console.log('authUser: ', senderId)
-        console.log('otherUser: ', receiverId)
-
         // compare receiverId and senderId
         if (senderId === receiverId) {
             return res.json({ error: 'You cannot send message to yourself' })

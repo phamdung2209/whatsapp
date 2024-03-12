@@ -315,7 +315,7 @@ export const Expand = (props: SVGProps) => (
         version="1.1"
         x="0px"
         y="0px"
-        enable-background="new 0 0 18 18"
+        enableBackground="new 0 0 18 18"
     >
         <path
             fill="currentColor"

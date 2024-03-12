@@ -6,6 +6,7 @@ export interface IUserDocument extends mongoose.Document {
     fullname?: string
     avatar?: string
     provider: string
+    emoji?: string
     createdAt: Date
     updatedAt: Date
 }
@@ -36,6 +37,10 @@ const userSchema = new mongoose.Schema<IUserDocument>(
         provider: {
             type: String,
             default: 'github' || 'google',
+        },
+        emoji: {
+            type: String,
+            default: '',
         },
     },
     {

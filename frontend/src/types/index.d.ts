@@ -5,6 +5,7 @@ export interface IUserDocument {
     fullname?: string
     avatar?: string
     provider: string
+    emoji?: string
     createdAt: Date
     updatedAt: Date
 }
@@ -23,6 +24,9 @@ export interface IMessageDocument {
     receiver: IUserDocument
     message: string
     messageType: IMessageType['text' | 'image' | 'video' | 'audio' | 'file']
+    read: boolean
+    delivered: boolean
+    deleted: boolean
     createdAt: Date
     updatedAt: Date
 }

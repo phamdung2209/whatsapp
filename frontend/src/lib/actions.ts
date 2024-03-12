@@ -80,6 +80,8 @@ export const sendMessagesAction = async (
         const senderId = session?.user?._id
         if (!session) throw new Error('Unauthorized user')
 
+        if (!message) return
+
         if (
             messageType === 'image' ||
             messageType === 'video' ||
@@ -93,9 +95,13 @@ export const sendMessagesAction = async (
         }
 
         const newMessage = await request.post(`/api/messages/send/${receiverId}`, {
-            message,
             senderId,
+            receiverId,
+            message,
             messageType,
+            read: false,
+            delivered: false,
+            deleted: false,
         })
 
         if (newMessage.error) {

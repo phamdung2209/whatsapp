@@ -67,3 +67,102 @@ export const isLinkUrl = (message: string) => {
 
     return false
 }
+
+export const extractTime = (date: string): string => {
+    const now: Date = new Date()
+    const sentTime: Date = new Date(date)
+
+    const diffInMinutes: number = Math.floor((now.getTime() - sentTime.getTime()) / (1000 * 60))
+
+    if (diffInMinutes < 1) {
+        return 'Sent just now'
+    } else if (diffInMinutes < 60) {
+        return `Sent ${diffInMinutes}m ago`
+    } else {
+        const options: Intl.DateTimeFormatOptions = {
+            weekday: 'short',
+            hour: 'numeric',
+            minute: 'numeric',
+        }
+        const sameDayFormat: string = sentTime.toLocaleDateString('en-US', options)
+
+        if (
+            now.getFullYear() === sentTime.getFullYear() &&
+            now.getMonth() === sentTime.getMonth() &&
+            now.getDate() === sentTime.getDate()
+        ) {
+            return `Today, ${sameDayFormat}`
+        } else {
+            const dateOptions: Intl.DateTimeFormatOptions = {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+            }
+            const differentDayFormat: string = sentTime.toLocaleDateString('en-US', dateOptions)
+            return differentDayFormat
+        }
+    }
+}
+
+export const funEmojis = [
+    '👾',
+    '⭐',
+    '🌟',
+    '🎉',
+    '🎊',
+    '🎈',
+    '🎁',
+    '🎂',
+    '🎄',
+    '🎃',
+    '🎗',
+    '🎟',
+    '🎫',
+    '🎖',
+    '🏆',
+    '🏅',
+    '🥇',
+    '🥈',
+    '🥉',
+    '⚽',
+    '🏀',
+    '🏈',
+    '⚾',
+    '🎾',
+    '🏐',
+    '🏉',
+    '🎱',
+    '🏓',
+    '🏸',
+    '🥅',
+    '🏒',
+    '🏑',
+    '🏏',
+    '⛳',
+    '🏹',
+    '🎣',
+    '🥊',
+    '🥋',
+    '🎽',
+    '⛸',
+    '🥌',
+    '🛷',
+    '🎿',
+    '⛷',
+    '🏂',
+    '🏋️',
+    '🤼',
+    '🤸',
+    '🤺',
+    '⛹️',
+    '🤾',
+    '🏌️',
+    '🏇',
+    '🧘',
+]
+
+export const getRandomEmoji = () => {
+    return funEmojis[Math.floor(Math.random() * funEmojis.length)]
+}

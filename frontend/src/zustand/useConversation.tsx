@@ -24,7 +24,7 @@ import { IUserDocument } from '~/types'
 //     },
 // ]
 
-type TMessage = {
+export type TMessage = {
     _id: string
     senderId: IUserDocument
     receiverId: IUserDocument
@@ -33,6 +33,7 @@ type TMessage = {
     read: boolean
     delivered: boolean
     deleted: boolean
+    emoji: string
     createdAt: string
     updatedAt: string
 }

@@ -3,6 +3,7 @@ import Converation, { IConversationDocument } from '../models/conversation.model
 import Message, { IMessageDocument } from '../models/message.model'
 import User, { IUserDocument } from '../models/user.model'
 import { v2 as cloudinary } from 'cloudinary'
+import { getReceiverSocketId, io } from '../socket/socket'
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,6 +24,10 @@ export const sendMessages = async (req: Request, res: Response) => {
             messageType: 'text' | 'image' | 'video' | 'audio' | 'file'
         } = req.body
 
+        if (!message) {
+            return res.json({ error: 'Message cannot be empty' })
+        }
+
         const receiver: IUserDocument | null = await User.findById(receiverId)
         const sender: IUserDocument | null = await User.findById(senderId)
 
@@ -40,7 +45,7 @@ export const sendMessages = async (req: Request, res: Response) => {
             })
         }
 
-        const newMessage: IMessageDocument = new Message({
+        let newMessage: IMessageDocument = new Message({
             senderId,
             receiverId,
             message,
@@ -55,6 +60,11 @@ export const sendMessages = async (req: Request, res: Response) => {
         }
 
         Promise.all([newMessage.save(), converation.save()])
+
+        // SOCKET.IO HERE
+        newMessage = (await newMessage.populate('senderId')) as IMessageDocument
+        newMessage = (await newMessage.populate('receiverId')) as IMessageDocument
+        io.to(getReceiverSocketId(receiverId)).emit('newMessage', newMessage)
 
         res.json({ message: 'Message sent' })
     } catch (error: any) {
@@ -88,12 +98,12 @@ export const getMessages = async (req: Request, res: Response) => {
                 {
                     path: 'senderId',
                     model: 'User',
-                    select: '_id fullname avatar username',
+                    select: '_id fullname avatar username emoji',
                 },
                 {
                     path: 'receiverId',
                     model: 'User',
-                    select: '_id fullname avatar username',
+                    select: '_id fullname avatar username emoji',
                 },
             ],
         })

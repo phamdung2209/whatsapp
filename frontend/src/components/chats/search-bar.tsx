@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowLeft } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useRef, useState, memo } from 'react'
 
 import './chats.scss'
 import { Close, Filter, Search } from '~/assets/icons'
@@ -62,4 +62,4 @@ const SearchBar = () => {
     )
 }
 
-export default SearchBar
+export default memo(SearchBar)

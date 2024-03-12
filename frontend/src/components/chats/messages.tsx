@@ -9,12 +9,13 @@ const Messages = ({
     selectedConversation,
     setSelectedConversation,
     session,
+    isOnline,
 }: {
     selectedConversation: IUserDocument
     setSelectedConversation: (selectedConversation: IUserDocument | null) => void | null
     session: Session | null
+    isOnline: boolean
 }) => {
-    const isOnline = true
     return (
         <div className="chats-messages w-screen xs:w-full flex flex-col justify-between max-[310px]:overflow-auto">
             <MessageHeader

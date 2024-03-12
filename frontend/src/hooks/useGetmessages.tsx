@@ -19,10 +19,7 @@ const useGetmessages = ({ authId }: { authId: string }) => {
                     senderId: authId,
                 })
 
-                if (res.error) {
-                    throw new Error(res.error)
-                }
-                console.log('res.data: ', res)
+                if (res.error) throw new Error(res.error)
 
                 setMessage(res.data)
             } catch (error: any) {
@@ -42,7 +39,7 @@ const useGetmessages = ({ authId }: { authId: string }) => {
             }
         }
 
-        getMessages()
+        if (selectedConversation?._id) getMessages()
 
         return () => {
             setMessage([])

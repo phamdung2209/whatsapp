@@ -1,7 +1,7 @@
 'use client'
 
 import { Session } from 'next-auth'
-import React from 'react'
+import React, { memo } from 'react'
 import useGetContacts from '~/hooks/useGetContacts'
 
 const ListChats = ({ session }: { session: Session | null }) => {
@@ -19,4 +19,4 @@ const ListChats = ({ session }: { session: Session | null }) => {
     return <div>ListChats</div>
 }
 
-export default ListChats
+export default memo(ListChats)

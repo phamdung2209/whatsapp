@@ -21,13 +21,17 @@ io.on('connection', (socket) => {
     console.log('a user connected: ', socket.id)
 
     const { senderId } = socket.handshake.query as { senderId: string }
+    console.log('userSockerMap', userSockerMap)
 
     if (senderId) {
         userSockerMap[senderId] = socket.id
     }
 
+    io.emit('getOnlineUsers', Object.keys(userSockerMap))
+
     socket.on('disconnect', () => {
         delete userSockerMap[senderId]
+        io.emit('getOnlineUsers', Object.keys(userSockerMap))
         console.log('user disconnected: ', socket.id)
     })
 })

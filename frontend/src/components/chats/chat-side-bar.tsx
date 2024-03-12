@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { FaAngleRight } from 'react-icons/fa6'
 

@@ -1,7 +1,6 @@
 'use client'
 
 import Tippy from '@tippyjs/react'
-import React from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import 'tippy.js/dist/tippy.css'
 import GetContacts from './get-contacts'

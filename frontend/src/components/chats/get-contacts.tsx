@@ -1,12 +1,4 @@
-import {
-    Sheet,
-    SheetClose,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from '../ui/sheet'
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet'
 import { Session } from 'next-auth'
 import { ArrowLeft } from 'lucide-react'
 
@@ -16,16 +8,11 @@ import ListContacts from './list-contacts'
 import { NEW_CONTACTS_DEFAULT } from '~/ultils/constants'
 import { ScrollArea } from '../ui/scroll-area'
 import useConversation from '~/zustand/useConversation'
+import ContactsSkeleton from '../shared/skeletons/contacts-skeleton'
 
-const GetContacts = ({
-    children,
-    session,
-}: {
-    children: React.ReactNode
-    session: Session | null
-}) => {
+const GetContacts = ({ children, session }: { children: React.ReactNode; session: Session | null }) => {
     const { loading, contacts } = useGetContacts({ authId: session?.user?._id ?? '' })
-    const { selectedConversation, setSelectedConversation } = useConversation()
+    const { setSelectedConversation, userOnline } = useConversation()
 
     return (
         <Sheet>
@@ -59,24 +46,26 @@ const GetContacts = ({
                             ))}
                         </div>
 
-                        {Object.entries(contacts).map(([letter, contacts]) => (
-                            <div key={Date.now() + letter}>
-                                <SheetDescription className="text-sm text-tea pl-4">
-                                    {letter}
-                                </SheetDescription>
+                        {loading ? (
+                            <ContactsSkeleton />
+                        ) : (
+                            Object.entries(contacts).map(([letter, contacts]) => (
+                                <div key={Date.now() + letter}>
+                                    <SheetDescription className="text-sm text-tea pl-4">{letter}</SheetDescription>
 
-                                <div className="flex flex-col mt-1">
-                                    {contacts.map((contact) => (
-                                        <SheetClose
-                                            key={contact._id}
-                                            onClick={() => setSelectedConversation(contact)}
-                                        >
-                                            <ListContacts contact={contact} />
-                                        </SheetClose>
-                                    ))}
+                                    <div className="flex flex-col mt-1">
+                                        {contacts.map((contact) => (
+                                            <SheetClose
+                                                key={contact._id}
+                                                onClick={() => setSelectedConversation(contact)}
+                                            >
+                                                <ListContacts userOnline={userOnline} contact={contact} />
+                                            </SheetClose>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </ScrollArea>
             </SheetContent>

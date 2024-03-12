@@ -44,12 +44,18 @@ const useConversation = create<{
 
     selectedConversation: IUserDocument | null
     setSelectedConversation: (selectedConversation: IUserDocument | null) => void | null
+
+    userOnline: string[]
+    setUserOnline: (userOnline: string[]) => void
 }>((set) => ({
     messages: [],
     setMessage: (messages) => set({ messages }),
 
     selectedConversation: null,
     setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
+
+    userOnline: [],
+    setUserOnline: (userOnline) => set({ userOnline }),
 }))
 
 export default useConversation

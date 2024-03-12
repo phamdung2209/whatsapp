@@ -6,7 +6,8 @@ import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import useGetmessages from '~/hooks/useGetmessages'
 import useListenMessages from '~/hooks/useListenMessages'
-import { extractTime, getRandomEmoji } from '~/lib/utils'
+import { extractTime } from '~/lib/utils'
+import { BsCheckAll } from 'react-icons/bs'
 
 const Message = ({ session }: { session: Session | null }) => {
     const { loading, messages } = useGetmessages({ authId: session?.user?._id ?? '' })
@@ -34,17 +35,13 @@ const Message = ({ session }: { session: Session | null }) => {
                         <Avatar>
                             <AvatarImage src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                         </Avatar>
-                        <h3 className="text-colors-primary font-medium">
-                            Welcome to your community!
-                        </h3>
+                        <h3 className="text-colors-primary font-medium">Welcome to your community!</h3>
                         <p className="text-colors-secondary text-sm">
                             Send important admin updates to all your members at once.
                         </p>
                     </div>
 
-                    <Button className="bg-transparent w-full text-tea hover:bg-transparent">
-                        Manage community
-                    </Button>
+                    <Button className="bg-transparent w-full text-tea hover:bg-transparent">Manage community</Button>
                 </div>
             </div>
         )
@@ -83,7 +80,8 @@ const Message = ({ session }: { session: Session | null }) => {
 
                             <div className="w-full text-colors-primary">{message.message}</div>
                             <div className="flex justify-end items-center text-colors-secondary text-xs gap-1">
-                                {extractTime(message.updatedAt)} <Tick />
+                                {extractTime(message.updatedAt)}
+                                {message.read ? <BsCheckAll className="text-base" /> : <Tick />}
                             </div>
                         </div>
                     </div>

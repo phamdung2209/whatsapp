@@ -33,12 +33,7 @@ export const logoutAction = async () => {
     }
 }
 
-export const updateUserAction = async (
-    userId: string,
-    fullname: string,
-    avatar: string,
-    email: string,
-) => {
+export const updateUserAction = async (userId: string, fullname: string, avatar: string, email: string) => {
     try {
         if (avatar === '') {
             avatar = `https://avatar.iran.liara.run/username?username=${fullname}`
@@ -82,12 +77,7 @@ export const sendMessagesAction = async (
 
         if (!message) return
 
-        if (
-            messageType === 'image' ||
-            messageType === 'video' ||
-            messageType === 'audio' ||
-            messageType === 'file'
-        ) {
+        if (messageType === 'image' || messageType === 'video' || messageType === 'audio' || messageType === 'file') {
             const { secure_url } = await cloudinary.uploader.upload(message, {
                 folder: `whatsapp/messages/images/${senderId}/${receiverId}`,
             })
@@ -110,7 +100,7 @@ export const sendMessagesAction = async (
 
         // SOCKET.IO HERE
 
-        revalidatePath('/')
+        // revalidatePath('/')
 
         return newMessage
     } catch (error: any) {

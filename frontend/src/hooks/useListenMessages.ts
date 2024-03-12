@@ -1,14 +1,19 @@
 import { Session } from 'next-auth'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 
 import useConversation, { TMessage } from '~/zustand/useConversation'
 
 const useListenMessages = ({ session }: { session: Session | null }) => {
     const { messages, setMessage } = useConversation()
+    const [isRinging, setIsRinging] = useState<boolean>(false)
 
     useEffect(() => {
-        const socket = io('http://localhost:8080', {
+        const notificationSound = new Audio(
+            'https://tiengdong.com/wp-content/uploads/Discord-notification-sound-effect-www_tiengdong_com.mp3?_=1',
+        )
+
+        const socket = io(process.env.NEXT_PUBLIC_SERVER_URL!, {
             query: {
                 senderId: session?.user._id,
             },
@@ -16,18 +21,30 @@ const useListenMessages = ({ session }: { session: Session | null }) => {
 
         socket?.on('newMessage', (newMessage: TMessage) => {
             console.log('newMessage', newMessage)
-
-            const notificationSound = new Audio(
-                'https://tiengdong.com/wp-content/uploads/Discord-notification-sound-effect-www_tiengdong_com.mp3?_=1',
-            )
-            notificationSound.play()
+            if (isRinging) {
+                notificationSound.play()
+            }
             setMessage([...messages, newMessage])
         })
+
+        const handleChangView = () => {
+            if (document.visibilityState === 'hidden') {
+                setIsRinging(true)
+            } else {
+                setIsRinging(false)
+            }
+        }
+        window.addEventListener('visibilitychange', handleChangView)
+
+        window.onbeforeunload = () => {
+            socket?.disconnect()
+            window.removeEventListener('visibilitychange', handleChangView)
+        }
 
         return () => {
             socket?.off('newMessage')
         }
-    }, [messages, setMessage, session?.user._id])
+    }, [session?.user._id, messages, setMessage, isRinging])
 }
 
 export default useListenMessages

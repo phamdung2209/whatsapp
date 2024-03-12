@@ -11,7 +11,9 @@ import { BsCheckAll } from 'react-icons/bs'
 
 const Message = ({ session }: { session: Session | null }) => {
     const { loading, messages } = useGetmessages({ authId: session?.user?._id ?? '' })
+
     useListenMessages({ session })
+    console.log('render')
 
     const lastMsgRef = useRef<HTMLDivElement>(null)
 

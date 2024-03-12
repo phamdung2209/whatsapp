@@ -7,14 +7,14 @@ import Messages from './messages'
 import useConversation from '~/zustand/useConversation'
 import { Button } from '../ui/button'
 import { Lock } from '~/assets/icons'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { io } from 'socket.io-client'
 
 const ChatContainer = ({ session }: { session: Session | null }) => {
     const { selectedConversation, setSelectedConversation, userOnline, setUserOnline } = useConversation()
 
     useEffect(() => {
-        const socket = io('http://localhost:8080', {
+        const socket = io(process.env.NEXT_PUBLIC_SERVER_URL!, {
             query: {
                 senderId: session?.user._id,
             },
@@ -29,7 +29,9 @@ const ChatContainer = ({ session }: { session: Session | null }) => {
         }
     }, [session?.user._id, setUserOnline])
 
-    const isOnline: boolean = userOnline.includes(selectedConversation?._id ?? '')
+    const isOnline: boolean = useMemo(() => {
+        return userOnline.includes(selectedConversation?._id ?? '')
+    }, [selectedConversation?._id, userOnline])
     return (
         <div
             className={`flex flex-[3_3_0] bg-[#f0f2f5] [height:unset] max-h-[calc(100dvh)] overflow-hidden ${

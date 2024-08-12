@@ -66,9 +66,12 @@ export const sendMessages = async (req: Request, res: Response) => {
         newMessage = (await newMessage.populate('receiverId')) as IMessageDocument
 
         const receiverSocketId = getReceiverSocketId(receiverId)
-        // if (receiverSocketId) {
-        io.to(receiverSocketId).emit('newMessage', newMessage)
-        // }
+
+        console.log('receiverSocket', receiverSocketId)
+
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit('newMessage', newMessage)
+        }
 
         res.json({ message: 'Message sent' })
     } catch (error: any) {

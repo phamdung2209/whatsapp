@@ -7,6 +7,7 @@ import { auth, signIn, signOut } from '~/auth'
 import * as request from '~/ultils/httpRequest.config'
 import { revalidateImage } from './utils'
 import { IMessageType } from '~/types'
+import { io } from 'socket.io-client'
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -99,8 +100,7 @@ export const sendMessagesAction = async (
         }
 
         // SOCKET.IO HERE
-
-        revalidatePath('/')
+        // revalidatePath('/')
 
         return newMessage
     } catch (error: any) {

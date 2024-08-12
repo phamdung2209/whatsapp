@@ -159,10 +159,7 @@ export const Filter = (props: SVGProps) => (
         y="0px"
         enableBackground="new 0 0 24 24"
     >
-        <path
-            fill="currentColor"
-            d="M10,18.1h4v-2h-4V18.1z M3,6.1v2h18v-2H3z M6,13.1h12v-2H6V13.1z"
-        ></path>
+        <path fill="currentColor" d="M10,18.1h4v-2h-4V18.1z M3,6.1v2h18v-2H3z M6,13.1h12v-2H6V13.1z"></path>
     </svg>
 )
 
@@ -199,14 +196,7 @@ export const Whatsapp = (props: SVGProps) => (
 )
 
 export const Lock = (props: SVGProps) => (
-    <svg
-        {...props}
-        viewBox="0 0 10 12"
-        height="12"
-        width="10"
-        preserveAspectRatio="xMidYMid meet"
-        version="1.1"
-    >
+    <svg {...props} viewBox="0 0 10 12" height="12" width="10" preserveAspectRatio="xMidYMid meet" version="1.1">
         <path
             d="M5.00847986,1.6 C6.38255462,1.6 7.50937014,2.67435859 7.5940156,4.02703389 L7.59911976,4.1906399 L7.599,5.462 L7.75719976,5.46214385 C8.34167974,5.46214385 8.81591972,5.94158383 8.81591972,6.53126381 L8.81591972,9.8834238 C8.81591972,10.4731038 8.34167974,10.9525438 7.75719976,10.9525438 L2.25767996,10.9525438 C1.67527998,10.9525438 1.2,10.4731038 1.2,9.8834238 L1.2,6.53126381 C1.2,5.94158383 1.67423998,5.46214385 2.25767996,5.46214385 L2.416,5.462 L2.41679995,4.1906399 C2.41679995,2.81636129 3.49135449,1.68973395 4.84478101,1.60510326 L5.00847986,1.6 Z M5.00847986,2.84799995 C4.31163824,2.84799995 3.73624912,3.38200845 3.6709675,4.06160439 L3.6647999,4.1906399 L3.663,5.462 L6.35,5.462 L6.35111981,4.1906399 C6.35111981,3.53817142 5.88169076,2.99180999 5.26310845,2.87228506 L5.13749818,2.85416626 L5.00847986,2.84799995 Z"
             fill="currentColor"
@@ -215,14 +205,7 @@ export const Lock = (props: SVGProps) => (
 )
 
 export const Plus = (props: SVGProps) => (
-    <svg
-        viewBox="0 0 24 24"
-        height="24"
-        width="24"
-        preserveAspectRatio="xMidYMid meet"
-        {...props}
-        fill="none"
-    >
+    <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" {...props} fill="none">
         <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -290,14 +273,7 @@ export const Send = (props: SVGProps) => (
 )
 
 export const Tick = (props: SVGProps) => (
-    <svg
-        viewBox="0 0 12 11"
-        height="11"
-        width="16"
-        preserveAspectRatio="xMidYMid meet"
-        {...props}
-        fill="none"
-    >
+    <svg viewBox="0 0 12 11" height="11" width="16" preserveAspectRatio="xMidYMid meet" {...props} fill="none">
         <path
             d="M11.1549 0.652832C11.0745 0.585124 10.9729 0.55127 10.8502 0.55127C10.7021 0.55127 10.5751 0.610514 10.4693 0.729004L4.28038 8.36523L1.87461 6.09277C1.8323 6.04622 1.78151 6.01025 1.72227 5.98486C1.66303 5.95947 1.60166 5.94678 1.53819 5.94678C1.407 5.94678 1.29275 5.99544 1.19541 6.09277L0.884379 6.40381C0.79128 6.49268 0.744731 6.60482 0.744731 6.74023C0.744731 6.87565 0.79128 6.98991 0.884379 7.08301L3.88047 10.0791C4.02859 10.2145 4.19574 10.2822 4.38194 10.2822C4.48773 10.2822 4.58929 10.259 4.68663 10.2124C4.78396 10.1659 4.86436 10.1003 4.92784 10.0156L11.5738 1.59863C11.6458 1.5013 11.6817 1.40186 11.6817 1.30029C11.6817 1.14372 11.6183 1.01888 11.4913 0.925781L11.1549 0.652832Z"
             fill="currentcolor"
@@ -317,9 +293,6 @@ export const Expand = (props: SVGProps) => (
         y="0px"
         enableBackground="new 0 0 18 18"
     >
-        <path
-            fill="currentColor"
-            d="M3.3,4.6L9,10.3l5.7-5.7l1.6,1.6L9,13.4L1.7,6.2L3.3,4.6z"
-        ></path>
+        <path fill="currentColor" d="M3.3,4.6L9,10.3l5.7-5.7l1.6,1.6L9,13.4L1.7,6.2L3.3,4.6z"></path>
     </svg>
 )

@@ -1,6 +1,7 @@
 import express from 'express'
 import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
+import { IUserDocument } from '../models/user.model'
 
 const app = express()
 const server = createServer(app)
@@ -12,6 +13,10 @@ const io = new Server(server, {
 })
 
 const userSockerMap: { [key: string]: string } = {}
+
+// const getReceiverSocketId = (receiverId: string): string => {
+//     return userSockerMap[receiverId]
+// }
 
 const getReceiverSocketId = (receiverId: string): string => {
     return userSockerMap[receiverId]

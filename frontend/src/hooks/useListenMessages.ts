@@ -20,7 +20,7 @@ const useListenMessages = ({ session }: { session: Session | null }) => {
         })
 
         socket?.on('newMessage', (newMessage: TMessage) => {
-            console.log('newMessage', newMessage)
+            // console.log('newMessage', newMessage)
             if (isRinging) {
                 notificationSound.play()
             }
